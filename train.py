@@ -188,7 +188,10 @@ def make_loss_compute(model, tgt_vocab, opt):
         compute = onmt.modules.CopyGeneratorLossCompute(
             model.generator, tgt_vocab, opt.copy_attn_force)
     else:
-        compute = onmt.Loss.NMTLossCompute(
+        # compute = onmt.Loss.NMTLossCompute(
+        #     model.generator, tgt_vocab,
+        #     label_smoothing=opt.label_smoothing)
+        compute = onmt.Loss.TranslitLossCompute(
             model.generator, tgt_vocab,
             label_smoothing=opt.label_smoothing)
 

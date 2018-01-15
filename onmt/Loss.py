@@ -252,7 +252,7 @@ class TranslitLossCompute(LossComputeBase):
         num_correct = pred.eq(flat_target) \
                           .masked_select(non_padding) \
                           .sum()
-        print(num_correct)
+        # print(num_correct)
         return onmt.Statistics(loss[0], non_padding.sum(), num_correct)
 
     def _compute_loss(self, batch, output, target):

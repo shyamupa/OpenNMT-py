@@ -244,7 +244,8 @@ class TranslitLossCompute(LossComputeBase):
 
     def _stats(self, loss, scores, target):
         pred = scores.max(1)[1]
-        print(pred)
+        print(pred.size())
+        print(target.size())
         non_padding = target.ne(self.padding_idx)
         num_correct = pred.eq(target) \
                           .masked_select(non_padding) \

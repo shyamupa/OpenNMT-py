@@ -247,9 +247,9 @@ class TranslitLossCompute(LossComputeBase):
         print(pred.size())
         print(target.size())
         flat_target = target.view(-1)
-        non_padding = target.ne(self.padding_idx)
+        non_padding = flat_target.ne(self.padding_idx)
         # print(non_padding)
-        num_correct = pred.eq(target) \
+        num_correct = pred.eq(flat_target) \
                           .masked_select(non_padding) \
                           .sum()
         print(num_correct)

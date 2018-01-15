@@ -247,7 +247,7 @@ class TranslitLossCompute(LossComputeBase):
         print(pred.size())
         print(target.size())
         non_padding = target.ne(self.padding_idx)
-        print(non_padding)
+        # print(non_padding)
         num_correct = pred.eq(target) \
                           .masked_select(non_padding) \
                           .sum()
@@ -256,9 +256,9 @@ class TranslitLossCompute(LossComputeBase):
 
     def _compute_loss(self, batch, output, target):
         scores = self.generator(self._bottle(output))
-        print(target.size())
+        # print(target.size())
         gtruth = target.view(-1)
-        print(gtruth.size())
+        # print(gtruth.size())
         if self.confidence < 1:
             tdata = gtruth.data
             mask = torch.nonzero(tdata.eq(self.padding_idx)).squeeze()
@@ -276,7 +276,7 @@ class TranslitLossCompute(LossComputeBase):
         else:
             loss_data = loss.data.clone()
 
-        stats = self._stats(loss_data, scores.data, target.view(-1).data)
+        stats = self._stats(loss_data, scores.data, target.data)
 
         return loss, stats
 

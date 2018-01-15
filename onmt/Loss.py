@@ -256,8 +256,9 @@ class TranslitLossCompute(LossComputeBase):
 
     def _compute_loss(self, batch, output, target):
         scores = self.generator(self._bottle(output))
-
+        print(target.size())
         gtruth = target.view(-1)
+        print(gtruth.size())
         if self.confidence < 1:
             tdata = gtruth.data
             mask = torch.nonzero(tdata.eq(self.padding_idx)).squeeze()
